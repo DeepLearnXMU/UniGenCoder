@@ -1,0 +1,886 @@
+( * ** for , in [ : - ] ) = . / lambda { } if == != + % return += else or > pass & << not del >= is try except <= < ~ with as from import def while | // and break ^ -= raise false true none
+identifier integer " escape_sequence float string
+
+argument_list-->leaf::( attribute leaf::)
+argument_list-->leaf::( attribute leaf::, attribute leaf::)
+argument_list-->leaf::( attribute leaf::, call leaf::)
+argument_list-->leaf::( attribute leaf::, keyword_argument leaf::)
+argument_list-->leaf::( attribute leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( attribute leaf::, lambda leaf::)
+argument_list-->leaf::( attribute leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( attribute leaf::, leaf::integer leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( attribute leaf::, leaf::string leaf::)
+argument_list-->leaf::( attribute leaf::, subscript leaf::, subscript leaf::)
+argument_list-->leaf::( binary_operator leaf::)
+argument_list-->leaf::( binary_operator leaf::, attribute leaf::)
+argument_list-->leaf::( binary_operator leaf::, call leaf::)
+argument_list-->leaf::( binary_operator leaf::, keyword_argument leaf::)
+argument_list-->leaf::( binary_operator leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( binary_operator leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( call leaf::)
+argument_list-->leaf::( call leaf::, attribute leaf::)
+argument_list-->leaf::( call leaf::, call leaf::)
+argument_list-->leaf::( call leaf::, call leaf::, keyword_argument leaf::)
+argument_list-->leaf::( call leaf::, call leaf::, leaf::string leaf::, keyword_argument leaf::)
+argument_list-->leaf::( call leaf::, keyword_argument leaf::)
+argument_list-->leaf::( call leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( call leaf::, keyword_argument leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( call leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( call leaf::, leaf::identifier leaf::, leaf::integer leaf::)
+argument_list-->leaf::( call leaf::, leaf::integer leaf::)
+argument_list-->leaf::( call leaf::, leaf::integer leaf::, binary_operator leaf::)
+argument_list-->leaf::( call leaf::, leaf::integer leaf::, keyword_argument leaf::)
+argument_list-->leaf::( call leaf::, leaf::integer leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( call leaf::, leaf::string leaf::)
+argument_list-->leaf::( call leaf::, leaf::string leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( call leaf::, leaf::string leaf::, leaf::none leaf::)
+argument_list-->leaf::( call leaf::, leaf::string leaf::, leaf::string leaf::)
+argument_list-->leaf::( call leaf::, tuple leaf::)
+argument_list-->leaf::( comparison_operator leaf::)
+argument_list-->leaf::( comparison_operator leaf::, keyword_argument leaf::)
+argument_list-->leaf::( conditional_expression leaf::)
+argument_list-->leaf::( dictionary leaf::)
+argument_list-->leaf::( dictionary leaf::, dictionary leaf::)
+argument_list-->leaf::( dictionary leaf::, keyword_argument leaf::)
+argument_list-->leaf::( dictionary_comprehension leaf::)
+argument_list-->leaf::( dictionary_splat leaf::)
+argument_list-->leaf::( generator_expression leaf::)
+argument_list-->leaf::( keyword_argument leaf::)
+argument_list-->leaf::( keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( keyword_argument leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( keyword_argument leaf::, keyword_argument leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( lambda leaf::)
+argument_list-->leaf::( lambda leaf::, attribute leaf::)
+argument_list-->leaf::( lambda leaf::, keyword_argument leaf::)
+argument_list-->leaf::( lambda leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( lambda leaf::, list leaf::)
+argument_list-->leaf::( lambda leaf::, leaf::string leaf::)
+argument_list-->leaf::( lambda leaf::, subscript leaf::)
+argument_list-->leaf::( lambda leaf::, subscript leaf::, subscript leaf::)
+argument_list-->leaf::( lambda leaf::, tuple leaf::)
+argument_list-->leaf::( leaf::)
+argument_list-->leaf::( leaf::float leaf::)
+argument_list-->leaf::( leaf::float leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::float leaf::, leaf::string leaf::)
+argument_list-->leaf::( leaf::float leaf::, unary_operator leaf::)
+argument_list-->leaf::( leaf::identifier leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, attribute leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, binary_operator leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, call leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, call leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, keyword_argument leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, lambda leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::identifier leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::identifier leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::identifier leaf::, keyword_argument leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::identifier leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::identifier leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::integer leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::integer leaf::, leaf::identifier leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::none leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, list leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, list_splat leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::string leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::string leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::string leaf::, leaf::none leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, leaf::string leaf::, leaf::string leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, subscript leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, tuple leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, unary_operator leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::identifier leaf::, unary_operator leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::integer leaf::)
+argument_list-->leaf::( leaf::integer leaf::, binary_operator leaf::)
+argument_list-->leaf::( leaf::integer leaf::, call leaf::)
+argument_list-->leaf::( leaf::integer leaf::, call leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::integer leaf::, call leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( leaf::integer leaf::, call leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::integer leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::integer leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( leaf::integer leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::integer leaf::, leaf::integer leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::integer leaf::, leaf::integer leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::integer leaf::, leaf::integer leaf::, unary_operator leaf::)
+argument_list-->leaf::( leaf::integer leaf::, list leaf::)
+argument_list-->leaf::( leaf::integer leaf::, leaf::string leaf::)
+argument_list-->leaf::( leaf::integer leaf::, leaf::string leaf::, leaf::string leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::integer leaf::, subscript leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::integer leaf::, unary_operator leaf::)
+argument_list-->leaf::( leaf::integer leaf::, unary_operator leaf::, unary_operator leaf::)
+argument_list-->leaf::( leaf::none leaf::, attribute leaf::)
+argument_list-->leaf::( leaf::none leaf::, call leaf::, call leaf::)
+argument_list-->leaf::( leaf::none leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::none leaf::, list_splat leaf::)
+argument_list-->leaf::( leaf::none leaf::, leaf::string leaf::)
+argument_list-->leaf::( leaf::true leaf::)
+argument_list-->leaf::( list leaf::)
+argument_list-->leaf::( list leaf::, keyword_argument leaf::)
+argument_list-->leaf::( list leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( list leaf::, keyword_argument leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( list leaf::, leaf::integer leaf::)
+argument_list-->leaf::( list leaf::, list leaf::)
+argument_list-->leaf::( list leaf::, list leaf::, keyword_argument leaf::)
+argument_list-->leaf::( list leaf::, list leaf::, list leaf::)
+argument_list-->leaf::( list leaf::, leaf::string leaf::)
+argument_list-->leaf::( list_comprehension leaf::)
+argument_list-->leaf::( list_comprehension leaf::, keyword_argument leaf::)
+argument_list-->leaf::( list_comprehension leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( list_splat leaf::)
+argument_list-->leaf::( list_splat leaf::, dictionary_splat leaf::)
+argument_list-->leaf::( parenthesized_expression leaf::)
+argument_list-->leaf::( set leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::string leaf::)
+argument_list-->leaf::( leaf::string leaf::, attribute leaf::)
+argument_list-->leaf::( leaf::string leaf::, attribute leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::string leaf::, binary_operator leaf::)
+argument_list-->leaf::( leaf::string leaf::, call leaf::)
+argument_list-->leaf::( leaf::string leaf::, dictionary leaf::)
+argument_list-->leaf::( leaf::string leaf::, dictionary_splat leaf::)
+argument_list-->leaf::( leaf::string leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::string leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::string leaf::, keyword_argument leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::string leaf::, keyword_argument leaf::, keyword_argument leaf::, keyword_argument leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::float leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::identifier leaf::, attribute leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::identifier leaf::, binary_operator leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::identifier leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::identifier leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::integer leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::integer leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::none leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::true leaf::)
+argument_list-->leaf::( leaf::string leaf::, list leaf::)
+argument_list-->leaf::( leaf::string leaf::, list_splat leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::string leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::string leaf::, attribute leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::string leaf::, call leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::string leaf::, call leaf::, leaf::integer leaf::, attribute leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::string leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::string leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::string leaf::, leaf::identifier leaf::, keyword_argument leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::string leaf::, leaf::integer leaf::)
+argument_list-->leaf::( leaf::string leaf::, leaf::string leaf::, leaf::string leaf::)
+argument_list-->leaf::( leaf::string leaf::, subscript leaf::)
+argument_list-->leaf::( leaf::string leaf::, tuple leaf::)
+argument_list-->leaf::( subscript leaf::)
+argument_list-->leaf::( subscript leaf::, attribute leaf::, call leaf::)
+argument_list-->leaf::( subscript leaf::, binary_operator leaf::)
+argument_list-->leaf::( subscript leaf::, call leaf::)
+argument_list-->leaf::( subscript leaf::, keyword_argument leaf::)
+argument_list-->leaf::( subscript leaf::, leaf::integer leaf::)
+argument_list-->leaf::( subscript leaf::, leaf::integer leaf::, keyword_argument leaf::)
+argument_list-->leaf::( subscript leaf::, leaf::string leaf::)
+argument_list-->leaf::( subscript leaf::, subscript leaf::)
+argument_list-->leaf::( subscript leaf::, unary_operator leaf::)
+argument_list-->leaf::( tuple leaf::)
+argument_list-->leaf::( tuple leaf::, attribute leaf::)
+argument_list-->leaf::( tuple leaf::, keyword_argument leaf::)
+argument_list-->leaf::( tuple leaf::, leaf::integer leaf::)
+argument_list-->leaf::( unary_operator leaf::)
+argument_list-->leaf::( unary_operator leaf::, leaf::identifier leaf::)
+argument_list-->leaf::( unary_operator leaf::, leaf::integer leaf::)
+as_pattern-->attribute leaf::as as_pattern_target
+as_pattern-->call leaf::as as_pattern_target
+as_pattern-->leaf::identifier leaf::as as_pattern_target
+as_pattern_target-->leaf::identifier
+assignment-->attribute leaf::= call
+assignment-->attribute leaf::= list
+assignment-->leaf::identifier leaf::= attribute
+assignment-->leaf::identifier leaf::= binary_operator
+assignment-->leaf::identifier leaf::= call
+assignment-->leaf::identifier leaf::= dictionary_comprehension
+assignment-->leaf::identifier leaf::= generator_expression
+assignment-->leaf::identifier leaf::= lambda
+assignment-->leaf::identifier leaf::= leaf::false
+assignment-->leaf::identifier leaf::= leaf::float
+assignment-->leaf::identifier leaf::= leaf::integer
+assignment-->leaf::identifier leaf::= list
+assignment-->leaf::identifier leaf::= list_comprehension
+assignment-->leaf::identifier leaf::= parenthesized_expression
+assignment-->leaf::identifier leaf::= leaf::string
+assignment-->leaf::identifier leaf::= subscript
+assignment-->leaf::identifier leaf::= tuple
+assignment-->pattern_list leaf::= attribute
+assignment-->pattern_list leaf::= call
+assignment-->pattern_list leaf::= list
+assignment-->subscript leaf::= attribute
+assignment-->subscript leaf::= binary_operator
+assignment-->subscript leaf::= call
+assignment-->subscript leaf::= dictionary
+assignment-->subscript leaf::= leaf::identifier
+assignment-->subscript leaf::= leaf::integer
+assignment-->subscript leaf::= list
+assignment-->subscript leaf::= list_comprehension
+assignment-->subscript leaf::= leaf::string
+assignment-->subscript leaf::= subscript
+assignment-->subscript leaf::= unary_operator
+attribute-->attribute leaf::. leaf::identifier
+attribute-->call leaf::. leaf::identifier
+attribute-->dictionary leaf::. leaf::identifier
+attribute-->leaf::identifier leaf::. leaf::identifier
+attribute-->list leaf::. leaf::identifier
+attribute-->parenthesized_expression leaf::. leaf::identifier
+attribute-->leaf::string leaf::. leaf::identifier
+attribute-->subscript leaf::. leaf::identifier
+augmented_assignment-->leaf::identifier leaf::+= call
+augmented_assignment-->leaf::identifier leaf::+= list_comprehension
+augmented_assignment-->leaf::identifier leaf::-= call
+binary_operator-->attribute leaf::* attribute
+binary_operator-->attribute leaf::* leaf::identifier
+binary_operator-->attribute leaf::- attribute
+binary_operator-->attribute leaf::- list
+binary_operator-->attribute leaf::/ leaf::float
+binary_operator-->attribute leaf::| attribute
+binary_operator-->attribute leaf::| leaf::identifier
+binary_operator-->binary_operator leaf::* leaf::integer
+binary_operator-->binary_operator leaf::+ call
+binary_operator-->binary_operator leaf::+ leaf::identifier
+binary_operator-->binary_operator leaf::+ leaf::integer
+binary_operator-->binary_operator leaf::+ list
+binary_operator-->binary_operator leaf::+ leaf::string
+binary_operator-->binary_operator leaf::+ subscript
+binary_operator-->binary_operator leaf::- leaf::integer
+binary_operator-->binary_operator leaf::| attribute
+binary_operator-->binary_operator leaf::| leaf::identifier
+binary_operator-->call leaf::% leaf::integer
+binary_operator-->call leaf::& call
+binary_operator-->call leaf::& leaf::identifier
+binary_operator-->call leaf::& set
+binary_operator-->call leaf::* leaf::integer
+binary_operator-->call leaf::* parenthesized_expression
+binary_operator-->call leaf::+ binary_operator
+binary_operator-->call leaf::+ call
+binary_operator-->call leaf::+ leaf::integer
+binary_operator-->call leaf::+ leaf::string
+binary_operator-->call leaf::+ subscript
+binary_operator-->call leaf::- call
+binary_operator-->call leaf::- leaf::integer
+binary_operator-->call leaf::- subscript
+binary_operator-->call leaf::/ call
+binary_operator-->call leaf::/ leaf::integer
+binary_operator-->call leaf::/ subscript
+binary_operator-->call leaf::// leaf::integer
+binary_operator-->call leaf::^ call
+binary_operator-->leaf::float leaf::* leaf::integer
+binary_operator-->leaf::float leaf::** leaf::integer
+binary_operator-->leaf::float leaf::- subscript
+binary_operator-->leaf::float leaf::/ leaf::integer
+binary_operator-->leaf::identifier leaf::% leaf::integer
+binary_operator-->leaf::identifier leaf::* binary_operator
+binary_operator-->leaf::identifier leaf::* leaf::float
+binary_operator-->leaf::identifier leaf::* leaf::identifier
+binary_operator-->leaf::identifier leaf::* leaf::integer
+binary_operator-->leaf::identifier leaf::* subscript
+binary_operator-->leaf::identifier leaf::** leaf::identifier
+binary_operator-->leaf::identifier leaf::** leaf::integer
+binary_operator-->leaf::identifier leaf::+ call
+binary_operator-->leaf::identifier leaf::+ leaf::identifier
+binary_operator-->leaf::identifier leaf::+ leaf::integer
+binary_operator-->leaf::identifier leaf::+ parenthesized_expression
+binary_operator-->leaf::identifier leaf::+ leaf::string
+binary_operator-->leaf::identifier leaf::- call
+binary_operator-->leaf::identifier leaf::- leaf::identifier
+binary_operator-->leaf::identifier leaf::- leaf::integer
+binary_operator-->leaf::identifier leaf::- subscript
+binary_operator-->leaf::identifier leaf::/ leaf::float
+binary_operator-->leaf::identifier leaf::/ leaf::identifier
+binary_operator-->leaf::identifier leaf::// leaf::integer
+binary_operator-->leaf::identifier leaf::<< leaf::identifier
+binary_operator-->leaf::identifier leaf::| call
+binary_operator-->leaf::identifier leaf::| leaf::identifier
+binary_operator-->leaf::integer leaf::* call
+binary_operator-->leaf::integer leaf::* leaf::identifier
+binary_operator-->leaf::integer leaf::* leaf::integer
+binary_operator-->leaf::integer leaf::** leaf::identifier
+binary_operator-->leaf::integer leaf::+ leaf::integer
+binary_operator-->leaf::integer leaf::- call
+binary_operator-->leaf::integer leaf::/ leaf::float
+binary_operator-->leaf::integer leaf::<< leaf::identifier
+binary_operator-->list leaf::* call
+binary_operator-->list leaf::* leaf::identifier
+binary_operator-->list leaf::* leaf::integer
+binary_operator-->list leaf::* parenthesized_expression
+binary_operator-->list leaf::+ list
+binary_operator-->parenthesized_expression leaf::& parenthesized_expression
+binary_operator-->parenthesized_expression leaf::* parenthesized_expression
+binary_operator-->parenthesized_expression leaf::** leaf::integer
+binary_operator-->parenthesized_expression leaf::/ leaf::identifier
+binary_operator-->parenthesized_expression leaf::/ leaf::integer
+binary_operator-->parenthesized_expression leaf::| parenthesized_expression
+binary_operator-->leaf::string leaf::% call
+binary_operator-->leaf::string leaf::% dictionary
+binary_operator-->leaf::string leaf::% leaf::float
+binary_operator-->leaf::string leaf::% leaf::identifier
+binary_operator-->leaf::string leaf::% tuple
+binary_operator-->leaf::string leaf::+ call
+binary_operator-->leaf::string leaf::+ leaf::identifier
+binary_operator-->leaf::string leaf::+ leaf::string
+binary_operator-->subscript leaf::+ binary_operator
+binary_operator-->subscript leaf::+ leaf::identifier
+binary_operator-->subscript leaf::+ leaf::integer
+binary_operator-->subscript leaf::+ leaf::string
+binary_operator-->subscript leaf::+ subscript
+binary_operator-->subscript leaf::- leaf::float
+binary_operator-->subscript leaf::- subscript
+binary_operator-->subscript leaf::/ parenthesized_expression
+binary_operator-->subscript leaf::/ subscript
+binary_operator-->tuple leaf::* leaf::integer
+binary_operator-->tuple leaf::+ leaf::identifier
+binary_operator-->unary_operator leaf::* subscript
+block-->break_statement
+block-->delete_statement
+block-->expression_statement
+block-->expression_statement break_statement
+block-->expression_statement expression_statement
+block-->expression_statement expression_statement expression_statement expression_statement expression_statement while_statement return_statement
+block-->expression_statement for_statement
+block-->expression_statement if_statement expression_statement expression_statement expression_statement expression_statement expression_statement
+block-->for_statement
+block-->for_statement for_statement
+block-->if_statement
+block-->pass_statement
+block-->raise_statement
+block-->return_statement
+block-->try_statement
+boolean_operator-->comparison_operator leaf::and comparison_operator
+boolean_operator-->comparison_operator leaf::or comparison_operator
+boolean_operator-->leaf::identifier leaf::and parenthesized_expression
+boolean_operator-->leaf::identifier leaf::or leaf::string
+boolean_operator-->not_operator leaf::and comparison_operator
+boolean_operator-->not_operator leaf::and not_operator
+boolean_operator-->parenthesized_expression leaf::and leaf::identifier
+boolean_operator-->parenthesized_expression leaf::or parenthesized_expression
+break_statement-->leaf::break
+call-->attribute argument_list
+call-->attribute generator_expression
+call-->leaf::identifier argument_list
+call-->leaf::identifier generator_expression
+call-->subscript argument_list
+comparison_operator-->attribute leaf::!= attribute
+comparison_operator-->attribute leaf::!= leaf::identifier
+comparison_operator-->attribute leaf::< leaf::identifier
+comparison_operator-->attribute leaf::== leaf::identifier
+comparison_operator-->attribute leaf::== leaf::integer
+comparison_operator-->attribute leaf::== leaf::string
+comparison_operator-->attribute leaf::> call
+comparison_operator-->attribute leaf::> leaf::identifier
+comparison_operator-->binary_operator leaf::in tuple
+comparison_operator-->call leaf::!= call
+comparison_operator-->call leaf::!= leaf::integer
+comparison_operator-->call leaf::!= parenthesized_expression
+comparison_operator-->call leaf::== call
+comparison_operator-->call leaf::== leaf::identifier
+comparison_operator-->call leaf::== leaf::integer
+comparison_operator-->call leaf::== parenthesized_expression
+comparison_operator-->call leaf::== leaf::string
+comparison_operator-->call leaf::== subscript
+comparison_operator-->call leaf::> leaf::integer
+comparison_operator-->call leaf::is leaf::identifier
+comparison_operator-->leaf::identifier leaf::!= leaf::identifier
+comparison_operator-->leaf::identifier leaf::!= leaf::integer
+comparison_operator-->leaf::identifier leaf::!= list
+comparison_operator-->leaf::identifier leaf::!= leaf::string
+comparison_operator-->leaf::identifier leaf::< leaf::identifier
+comparison_operator-->leaf::identifier leaf::< leaf::integer
+comparison_operator-->leaf::identifier leaf::<= subscript
+comparison_operator-->leaf::identifier leaf::== call
+comparison_operator-->leaf::identifier leaf::== leaf::identifier
+comparison_operator-->leaf::identifier leaf::== leaf::integer
+comparison_operator-->leaf::identifier leaf::== list
+comparison_operator-->leaf::identifier leaf::== leaf::string
+comparison_operator-->leaf::identifier leaf::== subscript
+comparison_operator-->leaf::identifier leaf::== tuple
+comparison_operator-->leaf::identifier leaf::> leaf::identifier
+comparison_operator-->leaf::identifier leaf::> leaf::integer
+comparison_operator-->leaf::identifier leaf::>= leaf::integer
+comparison_operator-->leaf::identifier leaf::in call
+comparison_operator-->leaf::identifier leaf::in leaf::identifier
+comparison_operator-->leaf::identifier leaf::in list
+comparison_operator-->leaf::identifier leaf::in tuple
+comparison_operator-->leaf::identifier leaf::is leaf::none
+comparison_operator-->leaf::identifier leaf::is leaf::not leaf::identifier
+comparison_operator-->leaf::identifier leaf::is leaf::not leaf::none
+comparison_operator-->leaf::identifier leaf::not leaf::in leaf::identifier
+comparison_operator-->leaf::identifier leaf::not leaf::in list
+comparison_operator-->leaf::identifier leaf::not leaf::in leaf::string
+comparison_operator-->leaf::identifier leaf::not leaf::in tuple
+comparison_operator-->leaf::integer leaf::< leaf::identifier
+comparison_operator-->leaf::integer leaf::< leaf::identifier leaf::< leaf::integer
+comparison_operator-->leaf::integer leaf::in leaf::identifier
+comparison_operator-->leaf::integer leaf::in list
+comparison_operator-->leaf::integer leaf::not leaf::in list
+comparison_operator-->leaf::string leaf::in call
+comparison_operator-->leaf::string leaf::in leaf::identifier
+comparison_operator-->leaf::string leaf::in list
+comparison_operator-->leaf::string leaf::in subscript
+comparison_operator-->leaf::string leaf::not leaf::in leaf::identifier
+comparison_operator-->subscript leaf::!= leaf::identifier
+comparison_operator-->subscript leaf::!= leaf::integer
+comparison_operator-->subscript leaf::!= leaf::string
+comparison_operator-->subscript leaf::< unary_operator
+comparison_operator-->subscript leaf::<= leaf::identifier
+comparison_operator-->subscript leaf::<= leaf::integer
+comparison_operator-->subscript leaf::<= subscript
+comparison_operator-->subscript leaf::== leaf::float
+comparison_operator-->subscript leaf::== leaf::identifier
+comparison_operator-->subscript leaf::== leaf::integer
+comparison_operator-->subscript leaf::== leaf::true
+comparison_operator-->subscript leaf::== leaf::string
+comparison_operator-->subscript leaf::== subscript
+comparison_operator-->subscript leaf::> leaf::integer
+comparison_operator-->subscript leaf::>= leaf::integer
+comparison_operator-->subscript leaf::in leaf::identifier
+comparison_operator-->subscript leaf::not leaf::in leaf::identifier
+comparison_operator-->tuple leaf::not leaf::in list
+conditional_expression-->binary_operator leaf::if binary_operator leaf::else leaf::string
+conditional_expression-->binary_operator leaf::if call leaf::else binary_operator
+conditional_expression-->call leaf::if call leaf::else leaf::identifier
+conditional_expression-->call leaf::if call leaf::else subscript
+conditional_expression-->call leaf::if leaf::identifier leaf::else leaf::integer
+conditional_expression-->call leaf::if leaf::identifier leaf::else leaf::none
+conditional_expression-->leaf::identifier leaf::if call leaf::else list
+conditional_expression-->leaf::identifier leaf::if leaf::identifier leaf::else leaf::integer
+conditional_expression-->leaf::integer leaf::if subscript leaf::else leaf::integer
+delete_statement-->leaf::del subscript
+dictionary-->leaf::{ leaf::}
+dictionary-->leaf::{ pair leaf::, leaf::}
+dictionary-->leaf::{ pair leaf::, pair leaf::, leaf::}
+dictionary-->leaf::{ pair leaf::, pair leaf::, pair leaf::, pair leaf::}
+dictionary-->leaf::{ pair leaf::, pair leaf::, pair leaf::}
+dictionary-->leaf::{ pair leaf::, pair leaf::}
+dictionary-->leaf::{ pair leaf::}
+dictionary_comprehension-->leaf::{ pair for_in_clause for_in_clause leaf::}
+dictionary_comprehension-->leaf::{ pair for_in_clause if_clause leaf::}
+dictionary_comprehension-->leaf::{ pair for_in_clause leaf::}
+dictionary_splat-->leaf::** dictionary
+dictionary_splat-->leaf::** leaf::identifier
+dotted_name-->leaf::identifier
+else_clause-->leaf::else leaf::: block
+except_clause-->leaf::except as_pattern leaf::: block
+except_clause-->leaf::except leaf::: block
+except_clause-->leaf::except leaf::identifier leaf::: block
+expression_statement-->assignment
+expression_statement-->attribute
+expression_statement-->augmented_assignment
+expression_statement-->binary_operator
+expression_statement-->call
+expression_statement-->call leaf::,
+expression_statement-->comparison_operator
+expression_statement-->dictionary_comprehension
+expression_statement-->generator_expression
+expression_statement-->lambda
+expression_statement-->list
+expression_statement-->list_comprehension
+expression_statement-->parenthesized_expression
+expression_statement-->set
+expression_statement-->set_comprehension
+expression_statement-->subscript
+for_in_clause-->leaf::for leaf::identifier leaf::in attribute
+for_in_clause-->leaf::for leaf::identifier leaf::in binary_operator
+for_in_clause-->leaf::for leaf::identifier leaf::in call
+for_in_clause-->leaf::for leaf::identifier leaf::in leaf::identifier
+for_in_clause-->leaf::for leaf::identifier leaf::in list
+for_in_clause-->leaf::for leaf::identifier leaf::in list_comprehension
+for_in_clause-->leaf::for leaf::identifier leaf::in parenthesized_expression
+for_in_clause-->leaf::for leaf::identifier leaf::in leaf::string
+for_in_clause-->leaf::for leaf::identifier leaf::in subscript
+for_in_clause-->leaf::for leaf::identifier leaf::in tuple
+for_in_clause-->leaf::for pattern_list leaf::in call
+for_in_clause-->leaf::for pattern_list leaf::in generator_expression
+for_in_clause-->leaf::for pattern_list leaf::in leaf::identifier
+for_in_clause-->leaf::for tuple_pattern leaf::in call
+for_in_clause-->leaf::for tuple_pattern leaf::in leaf::identifier
+for_statement-->leaf::for leaf::identifier leaf::in attribute leaf::: block
+for_statement-->leaf::for leaf::identifier leaf::in call leaf::: block
+for_statement-->leaf::for leaf::identifier leaf::in generator_expression leaf::: block
+for_statement-->leaf::for leaf::identifier leaf::in leaf::identifier leaf::: block
+for_statement-->leaf::for leaf::identifier leaf::in list_comprehension leaf::: block
+for_statement-->leaf::for leaf::identifier leaf::in subscript leaf::: block
+for_statement-->leaf::for tuple_pattern leaf::in call leaf::: block
+function_definition-->leaf::def leaf::identifier parameters leaf::: block
+generator_expression-->leaf::( binary_operator for_in_clause if_clause leaf::)
+generator_expression-->leaf::( binary_operator for_in_clause leaf::)
+generator_expression-->leaf::( boolean_operator for_in_clause leaf::)
+generator_expression-->leaf::( call for_in_clause if_clause leaf::)
+generator_expression-->leaf::( call for_in_clause leaf::)
+generator_expression-->leaf::( comparison_operator for_in_clause leaf::)
+generator_expression-->leaf::( conditional_expression for_in_clause leaf::)
+generator_expression-->leaf::( leaf::identifier for_in_clause for_in_clause leaf::)
+generator_expression-->leaf::( leaf::identifier for_in_clause if_clause leaf::)
+generator_expression-->leaf::( leaf::identifier for_in_clause leaf::)
+generator_expression-->leaf::( leaf::integer for_in_clause if_clause leaf::)
+generator_expression-->leaf::( leaf::integer for_in_clause leaf::)
+generator_expression-->leaf::( parenthesized_expression for_in_clause leaf::)
+generator_expression-->leaf::( subscript for_in_clause leaf::)
+generator_expression-->leaf::( tuple for_in_clause for_in_clause leaf::)
+generator_expression-->leaf::( tuple for_in_clause if_clause leaf::)
+generator_expression-->leaf::( tuple for_in_clause leaf::)
+if_clause-->leaf::if attribute
+if_clause-->leaf::if boolean_operator
+if_clause-->leaf::if call
+if_clause-->leaf::if comparison_operator
+if_clause-->leaf::if leaf::identifier
+if_clause-->leaf::if not_operator
+if_clause-->leaf::if parenthesized_expression
+if_statement-->leaf::if call leaf::: block
+if_statement-->leaf::if leaf::identifier leaf::: block
+if_statement-->leaf::if parenthesized_expression leaf::: block
+if_statement-->leaf::if parenthesized_expression leaf::: block else_clause
+import_from_statement-->leaf::from dotted_name leaf::import dotted_name
+import_statement-->leaf::import dotted_name
+keyword_argument-->leaf::identifier leaf::= attribute
+keyword_argument-->leaf::identifier leaf::= binary_operator
+keyword_argument-->leaf::identifier leaf::= call
+keyword_argument-->leaf::identifier leaf::= dictionary
+keyword_argument-->leaf::identifier leaf::= lambda
+keyword_argument-->leaf::identifier leaf::= leaf::false
+keyword_argument-->leaf::identifier leaf::= leaf::float
+keyword_argument-->leaf::identifier leaf::= leaf::identifier
+keyword_argument-->leaf::identifier leaf::= leaf::integer
+keyword_argument-->leaf::identifier leaf::= leaf::none
+keyword_argument-->leaf::identifier leaf::= leaf::true
+keyword_argument-->leaf::identifier leaf::= list
+keyword_argument-->leaf::identifier leaf::= parenthesized_expression
+keyword_argument-->leaf::identifier leaf::= leaf::string
+keyword_argument-->leaf::identifier leaf::= subscript
+keyword_argument-->leaf::identifier leaf::= tuple
+keyword_argument-->leaf::identifier leaf::= unary_operator
+lambda-->leaf::lambda lambda_parameters leaf::: attribute
+lambda-->leaf::lambda lambda_parameters leaf::: binary_operator
+lambda-->leaf::lambda lambda_parameters leaf::: call
+lambda-->leaf::lambda lambda_parameters leaf::: comparison_operator
+lambda-->leaf::lambda lambda_parameters leaf::: conditional_expression
+lambda-->leaf::lambda lambda_parameters leaf::: leaf::integer
+lambda-->leaf::lambda lambda_parameters leaf::: leaf::none
+lambda-->leaf::lambda lambda_parameters leaf::: list
+lambda-->leaf::lambda lambda_parameters leaf::: list_comprehension
+lambda-->leaf::lambda lambda_parameters leaf::: not_operator
+lambda-->leaf::lambda lambda_parameters leaf::: subscript
+lambda-->leaf::lambda lambda_parameters leaf::: tuple
+lambda_parameters-->leaf::identifier
+lambda_parameters-->leaf::identifier leaf::, leaf::identifier
+list-->leaf::[ attribute leaf::, attribute leaf::]
+list-->leaf::[ call leaf::, call leaf::, call leaf::]
+list-->leaf::[ call leaf::, call leaf::]
+list-->leaf::[ call leaf::, subscript leaf::]
+list-->leaf::[ call leaf::]
+list-->leaf::[ dictionary leaf::, dictionary leaf::, dictionary leaf::]
+list-->leaf::[ dictionary leaf::, dictionary leaf::]
+list-->leaf::[ dictionary leaf::]
+list-->leaf::[ leaf::]
+list-->leaf::[ leaf::float leaf::, leaf::float leaf::, leaf::float leaf::, leaf::float leaf::, leaf::float leaf::, leaf::float leaf::]
+list-->leaf::[ leaf::identifier leaf::, attribute leaf::]
+list-->leaf::[ leaf::identifier leaf::, call leaf::]
+list-->leaf::[ leaf::identifier leaf::, leaf::identifier leaf::, leaf::identifier leaf::, leaf::identifier leaf::]
+list-->leaf::[ leaf::identifier leaf::, leaf::identifier leaf::]
+list-->leaf::[ leaf::identifier leaf::]
+list-->leaf::[ leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::]
+list-->leaf::[ leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::]
+list-->leaf::[ leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::]
+list-->leaf::[ leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::]
+list-->leaf::[ leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::]
+list-->leaf::[ leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::]
+list-->leaf::[ leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::]
+list-->leaf::[ leaf::integer leaf::, leaf::integer leaf::]
+list-->leaf::[ leaf::integer leaf::, leaf::string leaf::]
+list-->leaf::[ leaf::integer leaf::]
+list-->leaf::[ leaf::true leaf::, leaf::false leaf::]
+list-->leaf::[ leaf::true leaf::, leaf::true leaf::, leaf::false leaf::, leaf::false leaf::, leaf::false leaf::, leaf::true leaf::]
+list-->leaf::[ leaf::true leaf::, leaf::true leaf::]
+list-->leaf::[ list leaf::, list leaf::, list leaf::, list leaf::, list leaf::, list leaf::]
+list-->leaf::[ list leaf::, list leaf::, list leaf::]
+list-->leaf::[ list leaf::, list leaf::]
+list-->leaf::[ leaf::string leaf::, call leaf::]
+list-->leaf::[ leaf::string leaf::, leaf::identifier leaf::, leaf::identifier leaf::]
+list-->leaf::[ leaf::string leaf::, leaf::identifier leaf::]
+list-->leaf::[ leaf::string leaf::, leaf::integer leaf::]
+list-->leaf::[ leaf::string leaf::, leaf::string leaf::, leaf::identifier leaf::]
+list-->leaf::[ leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::]
+list-->leaf::[ leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::]
+list-->leaf::[ leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::]
+list-->leaf::[ leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::]
+list-->leaf::[ leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::]
+list-->leaf::[ leaf::string leaf::, leaf::string leaf::, leaf::string leaf::]
+list-->leaf::[ leaf::string leaf::, leaf::string leaf::]
+list-->leaf::[ leaf::string leaf::]
+list-->leaf::[ subscript leaf::, call leaf::, subscript leaf::]
+list-->leaf::[ subscript leaf::, subscript leaf::, subscript leaf::]
+list-->leaf::[ subscript leaf::, subscript leaf::]
+list-->leaf::[ subscript leaf::]
+list-->leaf::[ tuple leaf::, tuple leaf::, leaf::string leaf::]
+list-->leaf::[ tuple leaf::, tuple leaf::, tuple leaf::, tuple leaf::, tuple leaf::]
+list-->leaf::[ tuple leaf::, tuple leaf::, tuple leaf::, tuple leaf::]
+list-->leaf::[ tuple leaf::, tuple leaf::, tuple leaf::]
+list-->leaf::[ tuple leaf::, tuple leaf::]
+list-->leaf::[ tuple leaf::]
+list-->leaf::[ unary_operator leaf::]
+list_comprehension-->leaf::[ attribute for_in_clause if_clause leaf::]
+list_comprehension-->leaf::[ attribute for_in_clause leaf::]
+list_comprehension-->leaf::[ call for_in_clause for_in_clause leaf::]
+list_comprehension-->leaf::[ call for_in_clause leaf::]
+list_comprehension-->leaf::[ dictionary for_in_clause leaf::]
+list_comprehension-->leaf::[ dictionary_comprehension for_in_clause leaf::]
+list_comprehension-->leaf::[ leaf::identifier for_in_clause for_in_clause for_in_clause leaf::]
+list_comprehension-->leaf::[ leaf::identifier for_in_clause for_in_clause if_clause leaf::]
+list_comprehension-->leaf::[ leaf::identifier for_in_clause for_in_clause leaf::]
+list_comprehension-->leaf::[ leaf::identifier for_in_clause if_clause if_clause leaf::]
+list_comprehension-->leaf::[ leaf::identifier for_in_clause if_clause leaf::]
+list_comprehension-->leaf::[ leaf::identifier for_in_clause leaf::]
+list_comprehension-->leaf::[ leaf::integer for_in_clause if_clause leaf::]
+list_comprehension-->leaf::[ leaf::none for_in_clause leaf::]
+list_comprehension-->leaf::[ list for_in_clause leaf::]
+list_comprehension-->leaf::[ list_comprehension for_in_clause leaf::]
+list_comprehension-->leaf::[ parenthesized_expression for_in_clause for_in_clause leaf::]
+list_comprehension-->leaf::[ parenthesized_expression for_in_clause leaf::]
+list_comprehension-->leaf::[ leaf::string for_in_clause leaf::]
+list_comprehension-->leaf::[ subscript for_in_clause for_in_clause leaf::]
+list_comprehension-->leaf::[ subscript for_in_clause if_clause leaf::]
+list_comprehension-->leaf::[ subscript for_in_clause leaf::]
+list_comprehension-->leaf::[ tuple for_in_clause for_in_clause for_in_clause leaf::]
+list_comprehension-->leaf::[ tuple for_in_clause for_in_clause leaf::]
+list_comprehension-->leaf::[ tuple for_in_clause if_clause leaf::]
+list_comprehension-->leaf::[ tuple for_in_clause leaf::]
+list_splat-->leaf::* call
+list_splat-->leaf::* leaf::identifier
+list_splat-->leaf::* list
+list_splat-->leaf::* list_comprehension
+list_splat-->leaf::* parenthesized_expression
+list_splat-->leaf::* subscript
+module-->delete_statement
+module-->expression_statement
+module-->expression_statement expression_statement
+module-->expression_statement expression_statement expression_statement
+module-->expression_statement expression_statement expression_statement expression_statement
+module-->expression_statement expression_statement expression_statement expression_statement expression_statement expression_statement expression_statement while_statement expression_statement
+module-->expression_statement expression_statement for_statement return_statement
+module-->expression_statement expression_statement if_statement
+module-->expression_statement for_statement
+module-->expression_statement for_statement expression_statement
+module-->expression_statement if_statement
+module-->expression_statement import_statement
+module-->expression_statement return_statement
+module-->expression_statement with_statement
+module-->for_statement
+module-->function_definition
+module-->if_statement
+module-->if_statement return_statement
+module-->import_from_statement
+module-->import_from_statement expression_statement
+module-->import_statement expression_statement
+module-->raise_statement
+module-->return_statement
+module-->try_statement
+module-->try_statement try_statement
+module-->with_statement
+module-->with_statement expression_statement
+not_operator-->leaf::not call
+not_operator-->leaf::not leaf::identifier
+pair-->attribute leaf::: dictionary
+pair-->call leaf::: call
+pair-->call leaf::: leaf::identifier
+pair-->leaf::identifier leaf::: call
+pair-->leaf::identifier leaf::: leaf::identifier
+pair-->leaf::identifier leaf::: list_comprehension
+pair-->leaf::identifier leaf::: parenthesized_expression
+pair-->leaf::identifier leaf::: leaf::string
+pair-->leaf::identifier leaf::: subscript
+pair-->parenthesized_expression leaf::: leaf::string
+pair-->leaf::string leaf::: attribute
+pair-->leaf::string leaf::: call
+pair-->leaf::string leaf::: dictionary
+pair-->leaf::string leaf::: leaf::false
+pair-->leaf::string leaf::: leaf::identifier
+pair-->leaf::string leaf::: leaf::integer
+pair-->leaf::string leaf::: list
+pair-->leaf::string leaf::: leaf::string
+pair-->leaf::string leaf::: subscript
+pair-->subscript leaf::: leaf::identifier
+pair-->subscript leaf::: list
+pair-->subscript leaf::: subscript
+pair-->tuple leaf::: leaf::identifier
+parameters-->leaf::( leaf::identifier leaf::)
+parenthesized_expression-->leaf::( attribute leaf::)
+parenthesized_expression-->leaf::( binary_operator leaf::)
+parenthesized_expression-->leaf::( boolean_operator leaf::)
+parenthesized_expression-->leaf::( call leaf::)
+parenthesized_expression-->leaf::( comparison_operator leaf::)
+parenthesized_expression-->leaf::( conditional_expression leaf::)
+parenthesized_expression-->leaf::( lambda leaf::)
+parenthesized_expression-->leaf::( leaf::integer leaf::)
+parenthesized_expression-->leaf::( leaf::none leaf::)
+parenthesized_expression-->leaf::( list leaf::)
+parenthesized_expression-->leaf::( not_operator leaf::)
+parenthesized_expression-->leaf::( subscript leaf::)
+parenthesized_expression-->leaf::( unary_operator leaf::)
+pass_statement-->leaf::pass
+pattern_list-->leaf::identifier leaf::, leaf::identifier
+pattern_list-->leaf::identifier leaf::, leaf::identifier leaf::, leaf::identifier
+pattern_list-->leaf::identifier leaf::, tuple_pattern
+pattern_list-->subscript leaf::, subscript
+pattern_list-->tuple_pattern leaf::, leaf::identifier
+raise_statement-->leaf::raise
+raise_statement-->leaf::raise call
+return_statement-->leaf::return binary_operator
+return_statement-->leaf::return call
+return_statement-->leaf::return comparison_operator
+return_statement-->leaf::return generator_expression
+return_statement-->leaf::return leaf::false
+return_statement-->leaf::return leaf::identifier
+return_statement-->leaf::return leaf::true
+return_statement-->leaf::return parenthesized_expression
+return_statement-->leaf::return subscript
+set-->leaf::{ attribute leaf::}
+set-->leaf::{ binary_operator leaf::}
+set-->leaf::{ call leaf::}
+set-->leaf::{ dictionary leaf::}
+set-->leaf::{ leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::}
+set-->leaf::{ set leaf::}
+set-->leaf::{ leaf::string leaf::, leaf::string leaf::, leaf::string leaf::}
+set_comprehension-->leaf::{ leaf::identifier for_in_clause for_in_clause leaf::}
+set_comprehension-->leaf::{ parenthesized_expression for_in_clause leaf::}
+slice-->binary_operator leaf::: binary_operator
+slice-->binary_operator leaf::: call
+slice-->call leaf::: unary_operator
+slice-->leaf:::
+slice-->leaf::: call
+slice-->leaf::: leaf::: leaf::integer
+slice-->leaf::: leaf::: parenthesized_expression
+slice-->leaf::: leaf::: unary_operator
+slice-->leaf::: leaf::identifier
+slice-->leaf::: leaf::integer
+slice-->leaf::: parenthesized_expression
+slice-->leaf::: unary_operator
+slice-->leaf::identifier leaf:::
+slice-->leaf::identifier leaf::: binary_operator
+slice-->leaf::identifier leaf::: parenthesized_expression
+slice-->leaf::integer leaf:::
+slice-->leaf::integer leaf::: leaf::: leaf::integer
+slice-->leaf::integer leaf::: leaf::integer
+slice-->leaf::integer leaf::: parenthesized_expression
+slice-->leaf::integer leaf::: unary_operator
+slice-->parenthesized_expression leaf:::
+slice-->unary_operator leaf:::
+subscript-->attribute leaf::[ binary_operator leaf::]
+subscript-->attribute leaf::[ call leaf::]
+subscript-->attribute leaf::[ comparison_operator leaf::, leaf::string leaf::]
+subscript-->attribute leaf::[ comparison_operator leaf::]
+subscript-->attribute leaf::[ leaf::integer leaf::, leaf::integer leaf::]
+subscript-->attribute leaf::[ leaf::integer leaf::]
+subscript-->attribute leaf::[ list leaf::]
+subscript-->attribute leaf::[ slice leaf::, parenthesized_expression leaf::, parenthesized_expression leaf::, slice leaf::]
+subscript-->attribute leaf::[ slice leaf::, parenthesized_expression leaf::]
+subscript-->attribute leaf::[ slice leaf::, slice leaf::]
+subscript-->attribute leaf::[ slice leaf::]
+subscript-->attribute leaf::[ leaf::string leaf::]
+subscript-->attribute leaf::[ subscript leaf::, tuple leaf::]
+subscript-->attribute leaf::[ subscript leaf::]
+subscript-->attribute leaf::[ tuple leaf::]
+subscript-->attribute leaf::[ unary_operator leaf::]
+subscript-->call leaf::[ leaf::identifier leaf::]
+subscript-->call leaf::[ leaf::integer leaf::]
+subscript-->call leaf::[ list leaf::]
+subscript-->call leaf::[ parenthesized_expression leaf::, slice leaf::, parenthesized_expression leaf::]
+subscript-->call leaf::[ parenthesized_expression leaf::, slice leaf::]
+subscript-->call leaf::[ slice leaf::, parenthesized_expression leaf::]
+subscript-->call leaf::[ slice leaf::]
+subscript-->call leaf::[ leaf::string leaf::]
+subscript-->call leaf::[ unary_operator leaf::]
+subscript-->leaf::identifier leaf::[ binary_operator leaf::]
+subscript-->leaf::identifier leaf::[ call leaf::, tuple leaf::]
+subscript-->leaf::identifier leaf::[ call leaf::]
+subscript-->leaf::identifier leaf::[ comparison_operator leaf::]
+subscript-->leaf::identifier leaf::[ leaf::identifier leaf::]
+subscript-->leaf::identifier leaf::[ leaf::integer leaf::, leaf::integer leaf::]
+subscript-->leaf::identifier leaf::[ leaf::integer leaf::]
+subscript-->leaf::identifier leaf::[ leaf::none leaf::, slice leaf::]
+subscript-->leaf::identifier leaf::[ list leaf::, list leaf::]
+subscript-->leaf::identifier leaf::[ list leaf::]
+subscript-->leaf::identifier leaf::[ parenthesized_expression leaf::, slice leaf::, slice leaf::]
+subscript-->leaf::identifier leaf::[ parenthesized_expression leaf::, slice leaf::]
+subscript-->leaf::identifier leaf::[ parenthesized_expression leaf::]
+subscript-->leaf::identifier leaf::[ slice leaf::, parenthesized_expression leaf::]
+subscript-->leaf::identifier leaf::[ slice leaf::, slice leaf::]
+subscript-->leaf::identifier leaf::[ slice leaf::]
+subscript-->leaf::identifier leaf::[ leaf::string leaf::]
+subscript-->leaf::identifier leaf::[ subscript leaf::, leaf::identifier leaf::]
+subscript-->leaf::identifier leaf::[ subscript leaf::]
+subscript-->leaf::identifier leaf::[ unary_operator leaf::]
+subscript-->leaf::string leaf::[ slice leaf::]
+subscript-->subscript leaf::[ binary_operator leaf::]
+subscript-->subscript leaf::[ leaf::identifier leaf::]
+subscript-->subscript leaf::[ leaf::integer leaf::]
+subscript-->subscript leaf::[ slice leaf::]
+subscript-->subscript leaf::[ leaf::string leaf::]
+try_statement-->leaf::try leaf::: block except_clause
+tuple-->leaf::( attribute leaf::, attribute leaf::)
+tuple-->leaf::( binary_operator leaf::, call leaf::)
+tuple-->leaf::( binary_operator leaf::, leaf::identifier leaf::)
+tuple-->leaf::( call leaf::, call leaf::)
+tuple-->leaf::( call leaf::, leaf::)
+tuple-->leaf::( call leaf::, leaf::identifier leaf::)
+tuple-->leaf::( call leaf::, subscript leaf::)
+tuple-->leaf::( call leaf::, unary_operator leaf::)
+tuple-->leaf::( comparison_operator leaf::, leaf::identifier leaf::)
+tuple-->leaf::( generator_expression leaf::, generator_expression leaf::)
+tuple-->leaf::( leaf::)
+tuple-->leaf::( leaf::float leaf::, leaf::float leaf::)
+tuple-->leaf::( leaf::float leaf::, unary_operator leaf::, leaf::float leaf::, leaf::float leaf::)
+tuple-->leaf::( leaf::identifier leaf::, binary_operator leaf::)
+tuple-->leaf::( leaf::identifier leaf::, call leaf::)
+tuple-->leaf::( leaf::identifier leaf::, leaf::)
+tuple-->leaf::( leaf::identifier leaf::, leaf::identifier leaf::)
+tuple-->leaf::( leaf::identifier leaf::, leaf::identifier leaf::, leaf::identifier leaf::)
+tuple-->leaf::( leaf::identifier leaf::, leaf::identifier leaf::, leaf::identifier leaf::, leaf::identifier leaf::)
+tuple-->leaf::( leaf::identifier leaf::, list_comprehension leaf::)
+tuple-->leaf::( leaf::identifier leaf::, parenthesized_expression leaf::)
+tuple-->leaf::( leaf::identifier leaf::, leaf::string leaf::)
+tuple-->leaf::( leaf::identifier leaf::, subscript leaf::)
+tuple-->leaf::( leaf::integer leaf::, leaf::)
+tuple-->leaf::( leaf::integer leaf::, leaf::integer leaf::)
+tuple-->leaf::( leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::)
+tuple-->leaf::( leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::, leaf::integer leaf::)
+tuple-->leaf::( leaf::integer leaf::, leaf::string leaf::, leaf::integer leaf::, leaf::string leaf::)
+tuple-->leaf::( leaf::integer leaf::, unary_operator leaf::)
+tuple-->leaf::( leaf::none leaf::, leaf::)
+tuple-->leaf::( list leaf::, list leaf::)
+tuple-->leaf::( list_comprehension leaf::, list_comprehension leaf::)
+tuple-->leaf::( leaf::string leaf::, attribute leaf::)
+tuple-->leaf::( leaf::string leaf::, leaf::)
+tuple-->leaf::( leaf::string leaf::, leaf::identifier leaf::, leaf::string leaf::, leaf::identifier leaf::)
+tuple-->leaf::( leaf::string leaf::, leaf::integer leaf::)
+tuple-->leaf::( leaf::string leaf::, leaf::string leaf::)
+tuple-->leaf::( leaf::string leaf::, leaf::string leaf::, leaf::string leaf::)
+tuple-->leaf::( leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::)
+tuple-->leaf::( leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::, leaf::string leaf::)
+tuple-->leaf::( subscript leaf::, call leaf::)
+tuple-->leaf::( subscript leaf::, leaf::identifier leaf::)
+tuple-->leaf::( subscript leaf::, subscript leaf::)
+tuple-->leaf::( subscript leaf::, subscript leaf::, subscript leaf::)
+tuple-->leaf::( subscript leaf::, unary_operator leaf::)
+tuple-->leaf::( tuple leaf::, leaf::)
+tuple-->leaf::( tuple leaf::, tuple leaf::, tuple leaf::)
+tuple-->leaf::( unary_operator leaf::, leaf::identifier leaf::)
+tuple-->leaf::( unary_operator leaf::, leaf::integer leaf::)
+tuple-->leaf::( unary_operator leaf::, subscript leaf::)
+tuple_pattern-->leaf::( leaf::identifier leaf::, leaf::identifier leaf::)
+tuple_pattern-->leaf::( leaf::identifier leaf::, leaf::identifier leaf::, leaf::identifier leaf::)
+unary_operator-->leaf::+ leaf::integer
+unary_operator-->leaf::- call
+unary_operator-->leaf::- leaf::float
+unary_operator-->leaf::- leaf::identifier
+unary_operator-->leaf::- leaf::integer
+unary_operator-->leaf::- subscript
+unary_operator-->leaf::~ attribute
+unary_operator-->leaf::~ call
+unary_operator-->leaf::~ leaf::identifier
+while_statement-->leaf::while leaf::identifier leaf::: block
+while_statement-->leaf::while leaf::true leaf::: block
+with_clause-->with_item
+with_item-->as_pattern
+with_statement-->leaf::with with_clause leaf::: block
