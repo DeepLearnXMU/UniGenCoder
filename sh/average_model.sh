@@ -1,0 +1,1 @@
+python average_checkpoints.py --path ${checkpoints_dir} --output ${output_dir}
