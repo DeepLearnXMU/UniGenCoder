@@ -164,78 +164,6 @@ def load_conala_data(args, filename, pool, tokenizer, split_tag, only_src=False,
     return examples, data
 
 
-def load_conala_tree_data(args, filename, pool, tokenizer, split_tag, only_src=False, is_sample=False):
-    def read_concode_examples(filename, data_num):
-        """Read examples from filename."""
-        examples = []
-
-        with open(filename) as f:
-            json_list = json.load(f)
-            for idx, x in enumerate(json_list):
-                e = Example(
-                        idx=idx,
-                        source=x['rewritten_intent'].strip() if x['rewritten_intent'] else x['intent'].strip(),
-                        target=x["snippet"].strip()
-                    )
-                e.target = e.target.replace('\n', ' ')
-                examples.append(e)
-                idx += 1
-                if idx == data_num:
-                    break
-        return examples
-    examples = read_concode_examples(filename, -1)
-    if split_tag == 'dev':
-        examples = examples[-500:]
-    elif split_tag == 'train':
-        examples = examples[:-500]
-
-    if is_sample:
-        examples = random.sample(examples, min(5000, len(examples)))
-    if split_tag == 'train':
-        calc_stats(examples, tokenizer, is_tokenize=True)
-    else:
-        calc_stats(examples)
-    
-    # source, target, url
-    tuple_examples = [(example, idx, tokenizer, args, split_tag) for idx, example in enumerate(examples)]
-    features = pool.map(convert_examples_to_features, tqdm(tuple_examples, total=len(tuple_examples)))
-    all_source_ids = torch.tensor([f.source_ids for f in features], dtype=torch.long)
-    if split_tag == 'test' or only_src:
-        data = TensorDataset(all_source_ids)
-    else:
-        all_target_ids = torch.tensor([f.target_ids for f in features], dtype=torch.long)
-        if split_tag == 'train' or split_tag == 'dev':
-            tree_filename = "/home/sly/CG/CodeT5/asdl/lang/java/bin/train_conala.bin"
-        else:
-            tree_filename = "/home/sly/CG/CodeT5/asdl/lang/java/bin/test_conala.bin"
-        print('tree_filename:', tree_filename)
-        tree_labels = pickle.load(open(tree_filename, 'rb'))
-
-        all_target_ids = torch.tensor([f.target_ids for f in features], dtype=torch.long)
-        # app_rule_idx_row, app_rule_mask_row, token_row, gen_token_mask_row
-        app_rule_idx_row = torch.tensor([f[0][:args.max_target_length] + [0] * (args.max_target_length - len(f[0][:args.max_target_length]))
-                                                        for f in tree_labels], dtype=torch.long)
-        app_rule_mask_row = torch.tensor([f[1][:args.max_target_length] + [0] * (args.max_target_length - len(f[1][:args.max_target_length]))
-                                                        for f in tree_labels], dtype=torch.long)
-        token_row = torch.tensor([f[2][:args.max_target_length] + [0] * (args.max_target_length - len(f[2][:args.max_target_length]))
-                                                        for f in tree_labels], dtype=torch.long)
-        gen_token_mask_row = torch.tensor([f[3][:args.max_target_length] + [0] * (args.max_target_length - len(f[3][:args.max_target_length]))
-                                                        for f in tree_labels], dtype=torch.long)
-        
-        if split_tag == 'train':
-            app_rule_idx_row = app_rule_idx_row[:-500]
-            app_rule_mask_row = app_rule_mask_row[:-500]
-            token_row = token_row[:-500]
-            gen_token_mask_row = gen_token_mask_row[:-500]
-        elif split_tag == 'dev':
-            app_rule_idx_row = app_rule_idx_row[-500:]
-            app_rule_mask_row = app_rule_mask_row[-500:]
-            token_row = token_row[-500:]
-            gen_token_mask_row = gen_token_mask_row[-500:]
-        data = TensorDataset(all_source_ids, all_target_ids, app_rule_idx_row, app_rule_mask_row, token_row, gen_token_mask_row)
-    return examples, data
-
-
 def load_and_cache_gen_tree_data(args, filename, pool, tokenizer, split_tag, only_src=False, is_sample=False, sample_number=0, distill=False, multitask=False, decode_label_path=None):
     # cache the data into args.cache_path except it is sampled
     # only_src: control whether to return only source ids for bleu evaluating (dev/test)
@@ -245,8 +173,6 @@ def load_and_cache_gen_tree_data(args, filename, pool, tokenizer, split_tag, onl
         data_tag = '_debug'
     cache_fn = '{}/{}.pt'.format(args.cache_path, split_tag + ('_src' if only_src else '') + data_tag)
     if decode_label_path is not None and split_tag != 'test': 
-        # decode_label_path = /home/sata/sly/CG/bin/multitask_train_1_decode_label.pkl, cache_fn = .../train_all.pt->.../multitask_train_all.pt
-        # decode_label_path = /home/sata/sly/CG/bin/multitask_distill_cross_train_1_decode_label.pkl, cache_fn = .../train_all.pt->.../multitask_distill_cross_train_all.pt
         mode = '_'.join(decode_label_path.split('/')[-1].split('1')[0].split('_')[:-2])
         cache_fn = '/'.join(cache_fn.split('/')[:-1]) + '/' + mode + '_'+ cache_fn.split('/')[-1]
     print(cache_fn, filename)
@@ -280,9 +206,9 @@ def load_and_cache_gen_tree_data(args, filename, pool, tokenizer, split_tag, onl
             data = TensorDataset(all_source_ids)
         else:
             if args.task == 'concode':
-                tree_filename = "/home/sly/CG/CodeT5/asdl/lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + ".bin"
+                tree_filename = "lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + ".bin"
             elif args.task == 'translate' and args.sub_task == 'cs-java':
-                tree_filename = "/home/sly/CG/CodeT5/asdl/lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + "_translate_cs-java_java.bin"
+                tree_filename = "lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + "_translate_cs-java_java.bin"
             print('tree_filename:', tree_filename)
             tree_labels = pickle.load(open(tree_filename, 'rb'))
 
@@ -446,9 +372,9 @@ def load_and_cache_gen_tree_data(args, filename, pool, tokenizer, split_tag, onl
 
             if distill:
                 if args.task == 'concode':
-                    match_index_filename =  "/home/sly/CG/CodeT5/asdl/lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + "_match_index.bin"
+                    match_index_filename =  "lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + "_match_index.bin"
                 elif args.task == 'translate' and args.sub_task == 'cs-java':
-                    match_index_filename =  "/home/sly/CG/CodeT5/asdl/lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + "_translate_cs-java_java_match_index.bin"
+                    match_index_filename =  "lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + "_translate_cs-java_java_match_index.bin"
                 match_index = pickle.load(open(match_index_filename, 'rb'))
                 match_index_tensor = torch.tensor(match_index, dtype=torch.long)
                 if multitask and decode_label_path is None:
@@ -519,8 +445,6 @@ def load_and_cache_gen_bi_tree_data(args, filename, pool, tokenizer, split_tag, 
         data_tag = '_debug'
     cache_fn = '{}/{}_srcAST.pt'.format(args.cache_path, split_tag + ('_src' if only_src else '') + data_tag)
     if decode_label_path is not None and split_tag != 'test': 
-        # decode_label_path = /home/sata/sly/CG/bin/multitask_train_1_decode_label.pkl, cache_fn = .../train_all.pt->.../multitask_train_all.pt
-        # decode_label_path = /home/sata/sly/CG/bin/multitask_distill_cross_train_1_decode_label.pkl, cache_fn = .../train_all.pt->.../multitask_distill_cross_train_all.pt
         mode = '_'.join(decode_label_path.split('/')[-1].split('1')[0].split('_')[:-2])
         cache_fn = '/'.join(cache_fn.split('/')[:-1]) + '/' + mode + '_'+ cache_fn.split('/')[-1]
     print(cache_fn, filename)
@@ -550,7 +474,7 @@ def load_and_cache_gen_bi_tree_data(args, filename, pool, tokenizer, split_tag, 
         features = pool.map(convert_examples_to_features, tqdm(tuple_examples, total=len(tuple_examples)))
         # all_source_ids = torch.tensor([f.source_ids for f in features], dtype=torch.long)
         if args.sub_task == 'cs-java':
-            source_tree_filename = "/home/sly/CG/CodeT5/asdl/lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + "_translate_" + args.sub_task + "_cs.bin"
+            source_tree_filename = "lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + "_translate_" + args.sub_task + "_cs.bin"
             print('source_tree_filename: ', source_tree_filename)
         source_tree_labels = pickle.load(open(source_tree_filename, 'rb'))
         print(len(source_tree_labels))
@@ -570,9 +494,9 @@ def load_and_cache_gen_bi_tree_data(args, filename, pool, tokenizer, split_tag, 
             data = TensorDataset(*all_source_ids)
         else:
             if args.task == 'concode':
-                tree_filename = "/home/sly/CG/CodeT5/asdl/lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + ".bin"
+                tree_filename = "lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + ".bin"
             elif args.task == 'translate' and args.sub_task == 'cs-java':
-                tree_filename = "/home/sly/CG/CodeT5/asdl/lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + "_translate_cs-java_java.bin"
+                tree_filename = "lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + "_translate_cs-java_java.bin"
             print('tree_filename: ', tree_filename)
             tree_labels = pickle.load(open(tree_filename, 'rb'))
 
@@ -730,7 +654,7 @@ def load_and_cache_gen_bi_tree_data(args, filename, pool, tokenizer, split_tag, 
             data = all_source_ids + [all_target_ids, app_rule_idx_row, app_rule_mask_row, token_row, gen_token_mask_row]
 
             if distill:
-                match_index_filename =  "/home/sly/CG/CodeT5/asdl/lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + "_match_index.bin"
+                match_index_filename =  "lang/java/bin/" + split_tag + ('_debug' if args.debug else '') + "_match_index.bin"
                 match_index = pickle.load(open(match_index_filename, 'rb'))
                 match_index_tensor = torch.tensor(match_index, dtype=torch.long)
                 if multitask and decode_label_path is None:

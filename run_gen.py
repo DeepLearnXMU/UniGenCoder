@@ -317,7 +317,6 @@ def main():
                 src_transition_system = None
         grammar = ASDLGrammar.from_text(open(grammar_txt).read(), 'program')
         transition_system = JavaTransitionSystem(grammar)
-        # vocab = pickle.load(open("/home/sly/CG/tranX-Java/data/django/vocab.freq15.bin", 'rb'))
         vocab = None
         model = TreeCodeT5(args, vocab, transition_system, src_transition_system)
         tokenizer = model.tokenizer

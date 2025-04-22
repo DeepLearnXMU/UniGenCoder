@@ -405,14 +405,14 @@ def re_organize_code(lang, grammar, hyp, tokenizer):
     # parser = Parser()
     # parser.set_language(JAVA_LANGUAGE)
 
-    if os.path.exists('/home/sly/CG/CodeT5/asdl/lang/java/bin/'+lang+'_list_no_win.bin'):
+    if os.path.exists('asdl/lang/java/bin/'+lang+'_list_no_win.bin'):
         # load list_no_win
-        list_no_win = pickle.load(open('/home/sly/CG/CodeT5/asdl/lang/java/bin/'+lang+'_list_no_win.bin', 'rb'))
+        list_no_win = pickle.load(open('asdl/lang/java/bin/'+lang+'_list_no_win.bin', 'rb'))
     else:
         # load dict_blank from bin/dict_blank.bin
-        dict_blank = pickle.load(open('/home/sly/CG/CodeT5/asdl/lang/java/bin/'+lang+'_dict_blank.bin', 'rb'))
+        dict_blank = pickle.load(open('asdl/lang/java/bin/'+lang+'_dict_blank.bin', 'rb'))
         # load dict_ from bin/dict.bin
-        dict_ = pickle.load(open('/home/sly/CG/CodeT5/asdl/lang/java/bin/'+lang+'_dict.bin', 'rb'))
+        dict_ = pickle.load(open('asdl/lang/java/bin/'+lang+'_dict.bin', 'rb'))
         list_no_win = []
         for key in dict_:
             if key not in dict_blank:
@@ -421,7 +421,7 @@ def re_organize_code(lang, grammar, hyp, tokenizer):
                 if dict_[key] > dict_blank[key]:
                     list_no_win.append(key)
         # save list_no_win to bin/list_no_win.bin
-        pickle.dump(list_no_win, open('/home/sly/CG/CodeT5/asdl/lang/java/bin/'+lang+'_list_no_win.bin', 'wb'))
+        pickle.dump(list_no_win, open('asdl/lang/java/bin/'+lang+'_list_no_win.bin', 'wb'))
 
     # re_codes = []
     # for index, code in enumerate(codes):
@@ -450,7 +450,7 @@ def run(args):
     parser.set_language(JAVA_LANGUAGE)
 
     grammar_txt = 'java_asdl.txt'
-    root_path = "/home/sly/CG/CodeT5/asdl/lang/java/"#full_grammar/"
+    root_path = "asdl/lang/java/"#full_grammar/"
     # if args.task == 'translate' and args.sub_task == 'cs-java':
     if args.task == 'translate' and args.lang == 'java':
         grammar_txt = root_path + 'java_asdl_translate.txt'
@@ -461,28 +461,28 @@ def run(args):
     asdl_text = open(grammar_txt).read()
     grammar = ASDLGrammar.from_text(asdl_text, root_type='program')
 
-    # file_list = ["/home/sly/CG/concode/train.json", "/home/sly/CG/concode/dev.json", "/home/sly/CG/concode/test.json"]
+    # file_list = ["data/concode/train.json", "data/concode/dev.json", "data/concode/test.json"]
     if args.task == 'concode':
-        file_list = ["/home/sly/CG/concode/train.json", "/home/sly/CG/concode/dev.json", "/home/sly/CG/concode/test.json"]
-        new_file_list = ["/home/sly/CG/concode/new/train.json", "/home/sly/CG/concode/new/dev.json", "/home/sly/CG/concode/new/test.json"]
+        file_list = ["data/concode/train.json", "data/concode/dev.json", "data/concode/test.json"]
+        new_file_list = ["data/concode/new/train.json", "data/concode/new/dev.json", "data/concode/new/test.json"]
     elif args.task == 'translate':
         if args.lang == 'java':
             file_list = [
-                # '/home/sly/CG/CodeT5/data/translate/train.java-cs.txt.java', 
-                '/home/sly/CG/CodeT5/data/translate/valid.java-cs.txt.java', 
-                # '/home/sly/CG/CodeT5/data/translate/test.java-cs.txt.java'
+                # 'data/translate/train.java-cs.txt.java', 
+                'data/translate/valid.java-cs.txt.java', 
+                # 'data/translate/test.java-cs.txt.java'
                 ]
             new_file_list = [
-                # '/home/sly/CG/CodeT5/data/translate/new/train.java-cs.txt.java', 
-                '/home/sly/CG/CodeT5/data/translate/new/valid.java-cs.txt.java', 
-                # '/home/sly/CG/CodeT5/data/translate/new/test.java-cs.txt.java'
+                # 'data/translate/new/train.java-cs.txt.java', 
+                'data/translate/new/valid.java-cs.txt.java', 
+                # 'data/translate/new/test.java-cs.txt.java'
                 ]
         if args.lang == 'cs':
-            file_list = ['/home/sly/CG/CodeT5/data/translate/train.java-cs.txt.cs', '/home/sly/CG/CodeT5/data/translate/valid.java-cs.txt.cs', '/home/sly/CG/CodeT5/data/translate/test.java-cs.txt.cs']
-            new_file_list = ['/home/sly/CG/CodeT5/data/translate/new/train.java-cs.txt.cs', '/home/sly/CG/CodeT5/data/translate/new/valid.java-cs.txt.cs', '/home/sly/CG/CodeT5/data/translate/new/test.java-cs.txt.cs']
+            file_list = ['data/translate/train.java-cs.txt.cs', 'data/translate/valid.java-cs.txt.cs', 'data/translate/test.java-cs.txt.cs']
+            new_file_list = ['data/translate/new/train.java-cs.txt.cs', 'data/translate/new/valid.java-cs.txt.cs', 'data/translate/new/test.java-cs.txt.cs']
     # elif args.task == 'translate' and args.sub_task == 'java-cs':
-    #     file_list = ['/home/sly/CG/CodeT5/data/translate/train.java-cs.txt.cs', '/home/sly/CG/CodeT5/data/translate/valid.java-cs.txt.cs', '/home/sly/CG/CodeT5/data/translate/test.java-cs.txt.cs']
-    #     new_file_list = ['/home/sly/CG/CodeT5/data/translate/train.java-cs.txt.cs', '/home/sly/CG/CodeT5/data/translate/valid.java-cs.txt.cs', '/home/sly/CG/CodeT5/data/translate/test.java-cs.txt.cs']
+    #     file_list = ['data/translate/train.java-cs.txt.cs', 'data/translate/valid.java-cs.txt.cs', 'data/translate/test.java-cs.txt.cs']
+    #     new_file_list = ['data/translate/train.java-cs.txt.cs', 'data/translate/valid.java-cs.txt.cs', 'data/translate/test.java-cs.txt.cs']
     print(file_list)
     print(new_file_list)
     out = open('log_test.out', 'w+')
@@ -498,14 +498,14 @@ def run(args):
 
     # list_no_win exist
     if args.use_dict:
-        if os.path.exists('/home/sly/CG/CodeT5/asdl/lang/java/bin/'+args.lang+'_list_no_win.bin'):
+        if os.path.exists('asdl/lang/java/bin/'+args.lang+'_list_no_win.bin'):
             # load list_no_win
-            list_no_win = pickle.load(open('/home/sly/CG/CodeT5/asdl/lang/java/bin/'+args.lang+'_list_no_win.bin', 'rb'))
+            list_no_win = pickle.load(open('asdl/lang/java/bin/'+args.lang+'_list_no_win.bin', 'rb'))
         else:
             # load dict_blank from bin/dict_blank.bin
-            dict_blank = pickle.load(open('/home/sly/CG/CodeT5/asdl/lang/java/bin/'+args.lang+'_dict_blank.bin', 'rb'))
+            dict_blank = pickle.load(open('asdl/lang/java/bin/'+args.lang+'_dict_blank.bin', 'rb'))
             # load dict_ from bin/dict.bin
-            dict_ = pickle.load(open('/home/sly/CG/CodeT5/asdl/lang/java/bin/'+args.lang+'_dict.bin', 'rb'))
+            dict_ = pickle.load(open('asdl/lang/java/bin/'+args.lang+'_dict.bin', 'rb'))
             list_no_win = []
             for key in dict_:
                 if key not in dict_blank:
@@ -514,15 +514,15 @@ def run(args):
                     if dict_[key] > dict_blank[key]:
                         list_no_win.append(key)
             # save list_no_win to bin/lang_list_no_win.bin
-            pickle.dump(list_no_win, open('/home/sly/CG/CodeT5/asdl/lang/java/bin/'+args.lang+'_list_no_win.bin', 'wb'))
-        # if os.path.exists('/home/sly/CG/CodeT5/asdl/lang/java/bin/list_blank_win.bin'):
+            pickle.dump(list_no_win, open('asdl/lang/java/bin/'+args.lang+'_list_no_win.bin', 'wb'))
+        # if os.path.exists('asdl/lang/java/bin/list_blank_win.bin'):
         #     # load list_no_win
-        #     list_no_win = pickle.load(open('/home/sly/CG/CodeT5/asdl/lang/java/bin/list_blank_win.bin', 'rb'))
+        #     list_no_win = pickle.load(open('asdl/lang/java/bin/list_blank_win.bin', 'rb'))
         # else:
         #     # load dict_blank from bin/dict_blank.bin
-        #     dict_blank = pickle.load(open('/home/sly/CG/CodeT5/asdl/lang/java/bin/dict_blank.bin', 'rb'))
+        #     dict_blank = pickle.load(open('asdl/lang/java/bin/dict_blank.bin', 'rb'))
         #     # load dict_ from bin/dict.bin
-        #     dict_ = pickle.load(open('/home/sly/CG/CodeT5/asdl/lang/java/bin/dict.bin', 'rb'))
+        #     dict_ = pickle.load(open('asdl/lang/java/bin/dict.bin', 'rb'))
         #     list_no_win = []
         #     for key in dict_:
         #         if key not in dict_blank:
@@ -531,7 +531,7 @@ def run(args):
         #             if dict_[key] > dict_blank[key]:
         #                 list_no_win.append(key)
         #     # save list_no_win to bin/list_no_win.bin
-        #     pickle.dump(list_no_win, open('/home/sly/CG/CodeT5/asdl/lang/java/bin/list_blank_win.bin', 'wb'))
+        #     pickle.dump(list_no_win, open('asdl/lang/java/bin/list_blank_win.bin', 'wb'))
     else:
         list_no_win = None
     
@@ -724,8 +724,8 @@ def run(args):
 
     out.close()
     if args.dict:
-        pickle.dump(dict_blank, open('/home/sly/CG/CodeT5/asdl/lang/java/bin/'+args.lang+'_dict_blank.bin', 'wb'))
-        pickle.dump(dict_, open('/home/sly/CG/CodeT5/asdl/lang/java/bin/'+args.lang+'_dict.bin', 'wb'))
+        pickle.dump(dict_blank, open('asdl/lang/java/bin/'+args.lang+'_dict_blank.bin', 'wb'))
+        pickle.dump(dict_, open('asdl/lang/java/bin/'+args.lang+'_dict.bin', 'wb'))
     # 对训练集生成primitive_vocab
     # primitive_tokens = [map(lambda a: a.action.token,
     #                         filter(lambda a: isinstance(a.action, GenTokenAction), e.tgt_actions))
@@ -743,18 +743,18 @@ def run(args):
         task_suffix = '_translate_cs'
 
     if args.match_index:
-        pickle.dump(file_index_list[0], open('/home/sly/CG/CodeT5/asdl/lang/java/bin/train' + ('_debug' if not args.train else '') + task_suffix + '_match_index.bin', 'wb'))
-        pickle.dump(file_index_list[1], open('/home/sly/CG/CodeT5/asdl/lang/java/bin/dev' + ('_debug' if not args.train else '') + task_suffix + '_match_index.bin', 'wb'))
-        pickle.dump(file_index_list[2], open('/home/sly/CG/CodeT5/asdl/lang/java/bin/test' + ('_debug' if not args.train  else '') + task_suffix + '_match_index.bin', 'wb'))
+        pickle.dump(file_index_list[0], open('asdl/lang/java/bin/train' + ('_debug' if not args.train else '') + task_suffix + '_match_index.bin', 'wb'))
+        pickle.dump(file_index_list[1], open('asdl/lang/java/bin/dev' + ('_debug' if not args.train else '') + task_suffix + '_match_index.bin', 'wb'))
+        pickle.dump(file_index_list[2], open('asdl/lang/java/bin/test' + ('_debug' if not args.train  else '') + task_suffix + '_match_index.bin', 'wb'))
 
     if args.tree_label:
         print("tree_label length: {}" .format(len(examples_list[0])))
         print("tree_label length: {}" .format(len(examples_list[1])))
         print("tree_label length: {}" .format(len(examples_list[2])))
-        print('/home/sly/CG/CodeT5/asdl/lang/java/bin/train' + ('_debug' if not args.train  else '') + task_suffix + '.bin')
-        pickle.dump(examples_list[0], open('/home/sly/CG/CodeT5/asdl/lang/java/bin/train' + ('_debug' if not args.train  else '') + task_suffix + '.bin', 'wb'))
-        pickle.dump(examples_list[1], open('/home/sly/CG/CodeT5/asdl/lang/java/bin/dev' + ('_debug' if not args.train else '') + task_suffix + '.bin', 'wb'))
-        pickle.dump(examples_list[2], open('/home/sly/CG/CodeT5/asdl/lang/java/bin/test' + ('_debug' if not args.train else '') + task_suffix + '.bin', 'wb'))
+        print('asdl/lang/java/bin/train' + ('_debug' if not args.train  else '') + task_suffix + '.bin')
+        pickle.dump(examples_list[0], open('asdl/lang/java/bin/train' + ('_debug' if not args.train  else '') + task_suffix + '.bin', 'wb'))
+        pickle.dump(examples_list[1], open('asdl/lang/java/bin/dev' + ('_debug' if not args.train else '') + task_suffix + '.bin', 'wb'))
+        pickle.dump(examples_list[2], open('asdl/lang/java/bin/test' + ('_debug' if not args.train else '') + task_suffix + '.bin', 'wb'))
 
 
 def check_grammar(args):
